@@ -61,6 +61,7 @@ export function Sidebar() {
           alt="SARA Logo"
           width={36}
           height={36}
+          style={{ width: 36, height: 'auto' }}
           className="rounded-[var(--sara-radius-md)] shrink-0"
         />
         <div>

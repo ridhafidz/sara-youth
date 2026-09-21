@@ -22,6 +22,7 @@ export default function RegisterPage() {
             alt="SARA Logo"
             width={40}
             height={40}
+            style={{ width: 40, height: 'auto' }}
             className="rounded-[var(--sara-radius-md)] shrink-0"
           />
           <div>

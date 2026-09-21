@@ -48,7 +48,7 @@ const FEATURES: FeatureCardData[] = [
     label: "Improvement",
     sublabel: "Recommendation Panel",
     icon: <Lightbulb size={22} strokeWidth={1.5} className="text-[var(--sara-primary-dark)]" />,
-    href: "#",
+    href: "/improvements",
   },
 ];
 

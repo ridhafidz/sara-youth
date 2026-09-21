@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export function HeroBanner() {
   return (
@@ -32,19 +33,21 @@ export function HeroBanner() {
 
           {/* CTAs */}
           <div className="flex gap-3 flex-wrap">
-            <button
+            <Link
+              href="/improvements"
               className="px-5 py-2.5 rounded-[var(--sara-radius-sm)] border border-white/60 text-white text-sm font-medium backdrop-blur-sm transition hover:bg-[var(--sara-surface)]/10 hover:border-white active:scale-95"
               aria-label="View Risk Summary"
             >
               View Risk Summary
-            </button>
-            <button
+            </Link>
+            <Link
+              href="/impact-assessment"
               className="px-5 py-2.5 rounded-[var(--sara-radius-sm)] bg-white text-sm font-semibold transition hover:opacity-90 active:scale-95"
               style={{ color: "var(--sara-primary)" }}
               aria-label="Access Monitoring Panel"
             >
               Access Monitoring Panel
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -54,6 +57,7 @@ export function HeroBanner() {
             src="/sdgs-img.jpeg"
             alt="SDGs Grid"
             fill
+            sizes="(max-width: 768px) 0px, (max-width: 1024px) 280px, 400px"
             className="object-cover opacity-90 hover:opacity-100 transition-opacity"
             priority
           />
