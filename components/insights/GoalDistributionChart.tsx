@@ -37,13 +37,13 @@ function ChartTooltip({
   const point = payload[0].payload;
 
   return (
-    <div className="rounded-lg border border-[#ECEEF0] bg-white px-3 py-2 text-xs shadow-[0_1px_3px_rgba(16,24,40,0.08)]">
-      <p className="font-medium text-[#16191D]">
+    <div className="rounded-lg border border-[var(--sara-border)] bg-[var(--sara-surface)] px-3 py-2 text-xs shadow-[0_1px_3px_rgba(16,24,40,0.08)]">
+      <p className="font-medium text-[var(--sara-text-primary)]">
         SDG {point.goal} — {point.shortName}
       </p>
       <p className="mt-1 text-[#5B6269]">
         {METRIC_LABEL[metric]}:{" "}
-        <span className="font-medium text-[#16191D]">
+        <span className="font-medium text-[var(--sara-text-primary)]">
           {metric === "averageScore"
             ? (point.averageScore ?? "belum diukur")
             : point.programCount}
@@ -79,18 +79,18 @@ export function GoalDistributionChart({
   const hasAnyData = data.some((point) => point.programCount > 0);
 
   return (
-    <section className="rounded-2xl border border-[#ECEEF0] bg-white p-6">
+    <section className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-base font-semibold text-[#16191D]">
+          <h2 className="text-base font-semibold text-[var(--sara-text-primary)]">
             Distribution of Student SDGs Programs by Goal
           </h2>
-          <p className="mt-1 text-sm text-[#8A9099]">
+          <p className="mt-1 text-sm text-[var(--sara-text-secondary)]">
             Sebaran program mahasiswa di antara 17 tujuan SDGs.
           </p>
         </div>
 
-        <div className="flex rounded-lg border border-[#D7DBDF] p-0.5">
+        <div className="flex rounded-lg border border-[var(--sara-border)] p-0.5">
           {(["programCount", "averageScore"] as Metric[]).map((option) => (
             <button
               key={option}
@@ -99,7 +99,7 @@ export function GoalDistributionChart({
               className={`rounded-md px-3 py-1.5 text-xs font-medium transition ${
                 metric === option
                   ? "bg-[#12A594] text-white"
-                  : "text-[#5B6269] hover:bg-[#F1F3F4]"
+                  : "text-[#5B6269] hover:bg-[var(--sara-muted-card)]"
               }`}
             >
               {METRIC_LABEL[option]}
@@ -109,7 +109,7 @@ export function GoalDistributionChart({
       </div>
 
       {!hasAnyData ? (
-        <p className="mt-8 py-10 text-center text-sm text-[#8A9099]">
+        <p className="mt-8 py-10 text-center text-sm text-[var(--sara-text-secondary)]">
           Belum ada program yang terdaftar pada goal mana pun.
         </p>
       ) : (

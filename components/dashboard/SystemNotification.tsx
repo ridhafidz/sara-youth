@@ -1,7 +1,8 @@
 "use client";
 
-import { Bell, CheckCircle2, MoreHorizontal } from "lucide-react";
+import { Bell, CheckCircle2, MoreHorizontal, Info } from "lucide-react";
 import { useLatestNotification } from "@/hooks/useNotification";
+import { useState, useRef, useEffect } from "react";
 
 // ── Skeleton ──────────────────────────────────────────────────────────────────
 
@@ -23,6 +24,18 @@ function NotificationSkeleton() {
 
 export function SystemNotification() {
   const { notification, loading, error } = useLatestNotification();
+  const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <section aria-labelledby="notif-heading">
@@ -33,12 +46,25 @@ export function SystemNotification() {
         >
           System Notification
         </h2>
-        <button
-          aria-label="More notification options"
-          className="text-[var(--sara-text-secondary)] hover:text-[var(--sara-text-primary)] transition-colors"
-        >
-          <MoreHorizontal size={16} />
-        </button>
+        <div className="relative" ref={menuRef}>
+          <button
+            aria-label="More notification options"
+            onClick={() => setShowMenu(!showMenu)}
+            className="text-[var(--sara-text-secondary)] hover:text-[var(--sara-text-primary)] transition-colors p-1 rounded-md hover:bg-[var(--sara-bg)]"
+          >
+            <MoreHorizontal size={16} />
+          </button>
+          {showMenu && (
+            <div className="absolute right-0 top-7 w-52 bg-[var(--sara-surface)] border border-[var(--sara-border)] rounded-xl shadow-lg z-20 p-3 animate-in fade-in zoom-in-95 duration-100">
+              <div className="flex items-start gap-2">
+                <Info size={13} className="text-[var(--sara-primary)] shrink-0 mt-0.5" />
+                <p className="text-[11px] text-[var(--sara-text-secondary)] leading-snug">
+                  Notifikasi ini sumber datanya sama dengan notifikasi di topbar — keduanya terhubung ke Firestore secara real-time.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {loading ? (

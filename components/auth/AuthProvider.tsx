@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { onAuthStateChanged, type User } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { setAuthCookie, clearAuthCookie } from "@/lib/authCookie";
+
+// Route yang tidak perlu redirect walau user tidak login
+const AUTH_ROUTES = ["/login", "/register"];
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -15,10 +19,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
-      
-      // Basic protection: if not logged in and on a protected route, redirect to login
-      if (!currentUser && pathname !== "/login") {
-        router.push("/login");
+
+      if (currentUser) {
+        // Pastikan cookie selalu sync dengan state Firebase (e.g. setelah refresh)
+        setAuthCookie(currentUser.uid);
+
+        // Jika user sudah login tapi masih di halaman auth → redirect ke dashboard
+        if (AUTH_ROUTES.some((r) => pathname.startsWith(r))) {
+          router.replace("/dashboard");
+        }
+      } else {
+        // User logout atau sesi berakhir → hapus cookie & redirect ke login
+        clearAuthCookie();
+        if (!AUTH_ROUTES.some((r) => pathname.startsWith(r))) {
+          router.replace("/login");
+        }
       }
     });
 
@@ -33,8 +48,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     );
   }
 
-  // If not logged in and not on login page, render nothing while redirecting
-  if (!user && pathname !== "/login") {
+  // Kalau belum login dan bukan di halaman auth, jangan render children
+  if (!user && !AUTH_ROUTES.some((r) => pathname.startsWith(r))) {
     return null;
   }
 

@@ -84,8 +84,8 @@ export default function SdgsProgramsPage() {
     <div className="space-y-6">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-xl font-semibold text-[#16191D]">SDGs Programs</h1>
-          <p className="mt-1 text-sm text-[#8A9099]">
+          <h1 className="text-xl font-semibold text-[var(--sara-text-primary)]">SDGs Programs</h1>
+          <p className="mt-1 text-sm text-[var(--sara-text-secondary)]">
             Daftar program mahasiswa yang akan diukur dampaknya. Tahap Input
             pada framework SARA Youth.
           </p>
@@ -110,8 +110,8 @@ export default function SdgsProgramsPage() {
       )}
 
       {showForm && (
-        <section className="rounded-2xl border border-[#ECEEF0] bg-white p-6">
-          <h2 className="mb-5 text-base font-semibold text-[#16191D]">
+        <section className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] p-6">
+          <h2 className="mb-5 text-base font-semibold text-[var(--sara-text-primary)]">
             {editing ? "Ubah program" : "Program baru"}
           </h2>
           <ProgramForm
@@ -133,12 +133,12 @@ export default function SdgsProgramsPage() {
       )}
 
       {loading ? (
-        <div className="rounded-2xl border border-[#ECEEF0] bg-white p-6">
+        <div className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] p-6">
           <div className="space-y-3">
             {[0, 1, 2].map((row) => (
               <div
                 key={row}
-                className="h-12 animate-pulse rounded-lg bg-[#F1F3F4]"
+                className="h-12 animate-pulse rounded-lg bg-[var(--sara-muted-card)]"
               />
             ))}
           </div>

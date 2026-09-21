@@ -1,16 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { setAuthCookie } from "@/lib/authCookie";
 
 export function LoginForm() {
-  const [email, setEmail] = useState("admin@sara.com");
-  const [password, setPassword] = useState("password123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") ?? "/dashboard";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,8 +21,10 @@ export function LoginForm() {
     setLoading(true);
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      router.push("/dashboard");
+      const credential = await signInWithEmailAndPassword(auth, email, password);
+      // Set cookie agar middleware server-side mengenali sesi
+      setAuthCookie(credential.user.uid);
+      router.push(`${redirectTo}${redirectTo === "/dashboard" ? "?login=success" : ""}`);
     } catch (err: any) {
       console.error(err);
       setError("Gagal login. Periksa email dan password.");
@@ -71,10 +76,6 @@ export function LoginForm() {
         </div>
       )}
 
-      <div className="text-xs text-[var(--sara-text-secondary)]">
-        Info Demo: gunakan <b>admin@sara.com</b> dan <b>password123</b>
-      </div>
-
       <button
         type="submit"
         disabled={loading}
@@ -83,6 +84,19 @@ export function LoginForm() {
       >
         {loading ? "Memproses..." : "Masuk"}
       </button>
+
+      <div className="text-center mt-4">
+        <span className="text-sm text-[var(--sara-text-secondary)]">
+          Belum punya akun?{" "}
+        </span>
+        <button
+          type="button"
+          onClick={() => router.push("/register")}
+          className="text-sm font-semibold text-[var(--sara-primary)] hover:underline"
+        >
+          Daftar
+        </button>
+      </div>
     </form>
   );
 }

@@ -31,8 +31,8 @@ export function DashboardCharts() {
   if (loading) {
     return (
       <div className="grid gap-6 lg:grid-cols-2">
-        <div className="h-80 animate-pulse rounded-2xl bg-[#F1F3F4]" />
-        <div className="h-80 animate-pulse rounded-2xl bg-[#F1F3F4]" />
+        <div className="h-80 animate-pulse rounded-2xl bg-[var(--sara-muted-card)]" />
+        <div className="h-80 animate-pulse rounded-2xl bg-[var(--sara-muted-card)]" />
       </div>
     );
   }

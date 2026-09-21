@@ -51,10 +51,10 @@ export default function ImpactInsightsPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-xl font-semibold text-[#16191D]">
+        <h1 className="text-xl font-semibold text-[var(--sara-text-primary)]">
           Impact Insights
         </h1>
-        <p className="mt-1 text-sm text-[#8A9099]">
+        <p className="mt-1 text-sm text-[var(--sara-text-secondary)]">
           Gambaran menyeluruh dampak seluruh program: sebaran per goal, tren
           dari waktu ke waktu, dan program yang perlu ditindaklanjuti.
         </p>
@@ -70,10 +70,10 @@ export default function ImpactInsightsPage() {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="h-24 animate-pulse rounded-2xl bg-[#F1F3F4]" />
+              <div key={i} className="h-24 animate-pulse rounded-2xl bg-[var(--sara-muted-card)]" />
             ))}
           </div>
-          <div className="h-80 animate-pulse rounded-2xl bg-[#F1F3F4]" />
+          <div className="h-80 animate-pulse rounded-2xl bg-[var(--sara-muted-card)]" />
         </div>
       ) : programs.length === 0 ? (
         <EmptyState

@@ -9,8 +9,10 @@ import {
   collection,
   query,
   orderBy,
+  addDoc,
   getDocs,
   onSnapshot,
+  serverTimestamp,
   type Unsubscribe,
   type QuerySnapshot,
   type DocumentData,
@@ -44,6 +46,25 @@ function mapDoc(id: string, data: FirestoreSchedule): Schedule {
 
 function snapshotToSchedules(snap: QuerySnapshot<DocumentData>): Schedule[] {
   return snap.docs.map((d) => mapDoc(d.id, d.data() as FirestoreSchedule));
+}
+
+// ── Writer ───────────────────────────────────────────────────────────────────
+
+export async function addSchedule(
+  title: string,
+  date: Date,
+  description?: string,
+): Promise<void> {
+  const monthNames = ["Jan","Feb","Mar","Apr","May","Jun",
+                      "Jul","Aug","Sep","Oct","Nov","Dec"];
+  await addDoc(collection(getDb(), "schedules"), {
+    title,
+    description: description ?? "",
+    date,
+    month: monthNames[date.getMonth()],
+    year: date.getFullYear(),
+    is_upcoming: date > new Date(),
+  });
 }
 
 // ── One-shot fetch ────────────────────────────────────────────────────────────

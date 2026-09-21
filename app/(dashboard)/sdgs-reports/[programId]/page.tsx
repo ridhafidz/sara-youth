@@ -59,16 +59,16 @@ export default function SdgsReportDetailPage() {
   if (loading) {
     return (
       <div className="space-y-4">
-        <div className="h-8 w-64 animate-pulse rounded-lg bg-[#F1F3F4]" />
-        <div className="mx-auto h-[600px] max-w-3xl animate-pulse rounded-2xl bg-[#F1F3F4]" />
+        <div className="h-8 w-64 animate-pulse rounded-lg bg-[var(--sara-muted-card)]" />
+        <div className="mx-auto h-[600px] max-w-3xl animate-pulse rounded-2xl bg-[var(--sara-muted-card)]" />
       </div>
     );
   }
 
   if (notFound || !program) {
     return (
-      <div className="rounded-2xl border border-[#ECEEF0] bg-white px-6 py-14 text-center">
-        <h1 className="text-base font-semibold text-[#16191D]">
+      <div className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] px-6 py-14 text-center">
+        <h1 className="text-base font-semibold text-[var(--sara-text-primary)]">
           Program tidak ditemukan
         </h1>
         <button
@@ -83,11 +83,11 @@ export default function SdgsReportDetailPage() {
 
   if (program.status === "draft") {
     return (
-      <div className="rounded-2xl border border-[#ECEEF0] bg-white px-6 py-14 text-center">
-        <h1 className="text-base font-semibold text-[#16191D]">
+      <div className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] px-6 py-14 text-center">
+        <h1 className="text-base font-semibold text-[var(--sara-text-primary)]">
           Program ini belum diukur
         </h1>
-        <p className="mx-auto mt-1 max-w-sm text-sm text-[#8A9099]">
+        <p className="mx-auto mt-1 max-w-sm text-sm text-[var(--sara-text-secondary)]">
           Laporan dampak baru bisa disusun setelah indikator dan bukti
           program dinilai di halaman Impact Assessment.
         </p>

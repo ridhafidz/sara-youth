@@ -158,6 +158,14 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /* ── SARA Neutral Dark ── */
+  --sara-bg:             oklch(0.145 0 0);
+  --sara-surface:        oklch(0.205 0 0);
+  --sara-border:         oklch(1 0 0 / 10%);
+  --sara-text-primary:   oklch(0.985 0 0);
+  --sara-text-secondary: oklch(0.708 0 0);
+  --sara-muted-card:     oklch(0.269 0 0);
 }
 
 @layer base {
@@ -170,6 +178,23 @@
   html {
     @apply font-sans;
   }
+}
+
+/* ── Elegant Scrollbar ── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--sara-bg);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--sara-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sara-text-secondary);
 }
 
 /* ── SARA Animations ── */
@@ -206,5 +231,38 @@
 @media (prefers-reduced-motion: reduce) {
   .feature-card:hover {
     transform: none;
+  }
+}
+
+/* ── Print Styles ── */
+@page {
+  /* margin: 0 menghilangkan area header/footer browser (URL, tanggal, nomor halaman) */
+  margin: 0;
+  size: A4 portrait;
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Tambahkan padding ke konten langsung supaya tidak mepet ke tepi */
+  #main-content {
+    padding: 16mm !important;
+  }
+
+  /* Hindari konten terpotong di tengah halaman */
+  section,
+  article,
+  table,
+  tr {
+    break-inside: avoid;
+  }
+
+  article {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: none !important;
   }
 }

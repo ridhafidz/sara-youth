@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { clearAuthCookie } from "@/lib/authCookie";
 import {
   LayoutDashboard,
   Target,
@@ -32,6 +35,17 @@ const secondaryNav = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      clearAuthCookie(); // Hapus cookie sebelum signOut agar middleware langsung redirect
+      await signOut(auth);
+      router.push("/login");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
@@ -43,7 +57,7 @@ export function Sidebar() {
       {/* ── Logo ── */}
       <div className="flex items-center gap-3 px-2 mb-8">
         <Image
-          src="/sara-logo-new.png"
+          src="/sara-logo.png"
           alt="SARA Logo"
           width={36}
           height={36}
@@ -87,16 +101,30 @@ export function Sidebar() {
 
       {/* ── Secondary Navigation ── */}
       <div className="flex flex-col gap-1 mt-6 pt-6 border-t border-[var(--sara-border)]">
-        {secondaryNav.map(({ label, href, icon: Icon }) => (
-          <Link
-            key={href}
-            href={href}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-[var(--sara-text-secondary)] hover:bg-[var(--sara-primary-light)] hover:text-[var(--sara-text-primary)] transition-all duration-150"
-          >
-            <Icon size={16} strokeWidth={1.8} />
-            {label}
-          </Link>
-        ))}
+        {secondaryNav.map(({ label, href, icon: Icon }) => {
+          if (href === "/logout") {
+            return (
+              <button
+                key={href}
+                onClick={handleLogout}
+                className="flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-[var(--sara-text-secondary)] hover:bg-[var(--sara-primary-light)] hover:text-[var(--sara-text-primary)] transition-all duration-150"
+              >
+                <Icon size={16} strokeWidth={1.8} />
+                {label}
+              </button>
+            );
+          }
+          return (
+            <Link
+              key={href}
+              href={href}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-[var(--sara-text-secondary)] hover:bg-[var(--sara-primary-light)] hover:text-[var(--sara-text-primary)] transition-all duration-150"
+            >
+              <Icon size={16} strokeWidth={1.8} />
+              {label}
+            </Link>
+          );
+        })}
       </div>
     </aside>
   );

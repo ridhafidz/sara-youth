@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { HeroBanner } from "@/components/dashboard/HeroBanner";
 import { FeatureGrid } from "@/components/dashboard/FeatureGrid";
 import { DashboardCharts } from "@/components/dashboard/DashboardCharts";
+import { LoginNotification } from "@/components/dashboard/LoginNotification";
 
 export const metadata: Metadata = {
   title: "Dashboard — SARA",
@@ -12,6 +14,10 @@ export const metadata: Metadata = {
 export default function DashboardPage() {
   return (
     <div className="space-y-8">
+      <Suspense fallback={null}>
+        <LoginNotification />
+      </Suspense>
+
       {/* Hero Banner — gradient + 17 SDG icon grid */}
       <HeroBanner />
 

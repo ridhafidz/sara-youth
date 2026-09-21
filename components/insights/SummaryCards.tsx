@@ -10,11 +10,11 @@ function StatCard({
   accent?: "danger";
 }) {
   return (
-    <div className="rounded-2xl border border-[#ECEEF0] bg-white p-5">
-      <p className="text-xs font-medium text-[#8A9099]">{label}</p>
+    <div className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] p-5">
+      <p className="text-xs font-medium text-[var(--sara-text-secondary)]">{label}</p>
       <p
         className={`mt-2 text-2xl font-semibold tabular-nums ${
-          accent === "danger" ? "text-[#B91C1C]" : "text-[#16191D]"
+          accent === "danger" ? "text-[#B91C1C]" : "text-[var(--sara-text-primary)]"
         }`}
       >
         {value}

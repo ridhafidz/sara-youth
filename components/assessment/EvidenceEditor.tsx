@@ -3,7 +3,7 @@
 import type { EvidenceType, ProgramEvidence } from "@/lib/types/sdgProgram";
 
 const inputClass =
-  "w-full rounded-lg border border-[#D7DBDF] bg-white px-3 py-2 text-sm text-[#16191D] outline-none transition focus:border-[#12A594] focus:ring-2 focus:ring-[#12A594]/20";
+  "w-full rounded-lg border border-[var(--sara-border)] bg-[var(--sara-surface)] px-3 py-2 text-sm text-[var(--sara-text-primary)] outline-none transition focus:border-[#12A594] focus:ring-2 focus:ring-[#12A594]/20";
 
 const EVIDENCE_META: Record<
   EvidenceType,
@@ -66,18 +66,18 @@ export function EvidenceEditor({
   ).length;
 
   return (
-    <section className="rounded-2xl border border-[#ECEEF0] bg-white p-6">
+    <section className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-base font-semibold text-[#16191D]">
+          <h2 className="text-base font-semibold text-[var(--sara-text-primary)]">
             Bukti pendukung
           </h2>
-          <p className="mt-1 text-sm text-[#8A9099]">
+          <p className="mt-1 text-sm text-[var(--sara-text-secondary)]">
             Tautan ke file yang sudah diunggah, misalnya Google Drive atau
             Firebase Storage.
           </p>
         </div>
-        <span className="shrink-0 rounded-full bg-[#F1F3F4] px-3 py-1 text-xs font-medium text-[#5B6269]">
+        <span className="shrink-0 rounded-full bg-[var(--sara-muted-card)] px-3 py-1 text-xs font-medium text-[#5B6269]">
           {filledCount} dari 3 terisi
         </span>
       </div>
@@ -94,11 +94,11 @@ export function EvidenceEditor({
               className={`rounded-xl border p-4 transition ${
                 filled
                   ? "border-[#12A594]/30 bg-[#E4F6F3]/30"
-                  : "border-[#ECEEF0] bg-[#FAFBFB]"
+                  : "border-[var(--sara-border)] bg-[var(--sara-muted-card)]"
               }`}
             >
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-medium text-[#16191D]">
+                <span className="text-sm font-medium text-[var(--sara-text-primary)]">
                   {meta.label}
                 </span>
                 {filled && (
@@ -114,7 +114,7 @@ export function EvidenceEditor({
                 onChange={(e) => update(type, { url: e.target.value })}
                 placeholder="https://"
               />
-              <p className="mt-1.5 text-xs text-[#8A9099]">{meta.hint}</p>
+              <p className="mt-1.5 text-xs text-[var(--sara-text-secondary)]">{meta.hint}</p>
             </div>
           );
         })}

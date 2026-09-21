@@ -3,7 +3,7 @@
 import type { ProgramIndicator } from "@/lib/types/sdgProgram";
 
 const inputClass =
-  "w-full rounded-lg border border-[#D7DBDF] bg-white px-3 py-2 text-sm text-[#16191D] outline-none transition focus:border-[#12A594] focus:ring-2 focus:ring-[#12A594]/20";
+  "w-full rounded-lg border border-[var(--sara-border)] bg-[var(--sara-surface)] px-3 py-2 text-sm text-[var(--sara-text-primary)] outline-none transition focus:border-[#12A594] focus:ring-2 focus:ring-[#12A594]/20";
 
 /** Rasio capaian satu indikator, atau null bila belum diukur. */
 function ratioOf(indicator: ProgramIndicator): number | null {
@@ -15,7 +15,7 @@ function RatioLabel({ indicator }: { indicator: ProgramIndicator }) {
   const ratio = ratioOf(indicator);
 
   if (ratio === null) {
-    return <span className="text-xs text-[#8A9099]">Belum diukur</span>;
+    return <span className="text-xs text-[var(--sara-text-secondary)]">Belum diukur</span>;
   }
 
   const percent = Math.round(ratio * 100);
@@ -63,18 +63,18 @@ export function IndicatorEditor({
   }
 
   return (
-    <section className="rounded-2xl border border-[#ECEEF0] bg-white p-6">
-      <h2 className="text-base font-semibold text-[#16191D]">
+    <section className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] p-6">
+      <h2 className="text-base font-semibold text-[var(--sara-text-primary)]">
         Indikator keberhasilan
       </h2>
-      <p className="mt-1 text-sm text-[#8A9099]">
+      <p className="mt-1 text-sm text-[var(--sara-text-secondary)]">
         Indikator yang dibiarkan kosong tetap dihitung sebagai capaian nol, agar
         kelengkapan pengukuran ikut tercermin dalam skor.
       </p>
 
       {indicators.length === 0 ? (
-        <div className="mt-5 rounded-xl border border-dashed border-[#D7DBDF] px-4 py-8 text-center">
-          <p className="text-sm text-[#8A9099]">
+        <div className="mt-5 rounded-xl border border-dashed border-[var(--sara-border)] px-4 py-8 text-center">
+          <p className="text-sm text-[var(--sara-text-secondary)]">
             Belum ada indikator. Tambahkan minimal satu agar dampak program bisa
             diukur.
           </p>
@@ -92,7 +92,7 @@ export function IndicatorEditor({
             {indicators.map((indicator, index) => (
               <div
                 key={index}
-                className="rounded-xl border border-[#ECEEF0] bg-[#FAFBFB] p-4"
+                className="rounded-xl border border-[var(--sara-border)] bg-[var(--sara-muted-card)] p-4"
               >
                 <div className="grid gap-3 sm:grid-cols-12">
                   <div className="sm:col-span-5">
@@ -161,7 +161,7 @@ export function IndicatorEditor({
                       type="button"
                       onClick={() => remove(index)}
                       aria-label={`Hapus indikator ${indicator.name || index + 1}`}
-                      className="pb-2 text-xs text-[#8A9099] transition hover:text-[#B91C1C]"
+                      className="pb-2 text-xs text-[var(--sara-text-secondary)] transition hover:text-[#B91C1C]"
                     >
                       Hapus
                     </button>
@@ -174,7 +174,7 @@ export function IndicatorEditor({
           <button
             type="button"
             onClick={add}
-            className="mt-4 rounded-lg border border-[#D7DBDF] px-4 py-2 text-sm font-medium text-[#16191D] transition hover:border-[#12A594] hover:text-[#0C8377]"
+            className="mt-4 rounded-lg border border-[var(--sara-border)] px-4 py-2 text-sm font-medium text-[var(--sara-text-primary)] transition hover:border-[#12A594] hover:text-[#0C8377]"
           >
             Tambah indikator
           </button>

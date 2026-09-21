@@ -8,7 +8,7 @@ import { SDG_GOAL_LIST } from "@/lib/sdgGoals";
 import type { ProgramStatus, SdgProgram } from "@/lib/types/sdgProgram";
 
 const selectClass =
-  "rounded-lg border border-[#D7DBDF] bg-white px-3 py-2 text-sm text-[#16191D] outline-none focus:border-[#12A594]";
+  "rounded-lg border border-[var(--sara-border)] bg-[var(--sara-surface)] px-3 py-2 text-sm text-[var(--sara-text-primary)] outline-none focus:border-[#12A594]";
 
 export function ProgramTable({
   programs,
@@ -77,11 +77,11 @@ export function ProgramTable({
         </select>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-[#ECEEF0] bg-white">
+      <div className="overflow-hidden rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)]">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[860px] text-left">
             <thead>
-              <tr className="border-b border-[#ECEEF0] bg-[#FAFBFB]">
+              <tr className="border-b border-[var(--sara-border)] bg-[var(--sara-muted-card)]">
                 <th className="px-5 py-3 text-xs font-semibold text-[#5B6269]">
                   Program
                 </th>
@@ -106,13 +106,13 @@ export function ProgramTable({
               {filtered.map((program) => (
                 <tr
                   key={program.id}
-                  className="border-b border-[#ECEEF0] last:border-0 transition hover:bg-[#FAFBFB]"
+                  className="border-b border-[var(--sara-border)] last:border-0 transition hover:bg-[var(--sara-muted-card)]"
                 >
                   <td className="px-5 py-4">
-                    <div className="font-medium text-[#16191D]">
+                    <div className="font-medium text-[var(--sara-text-primary)]">
                       {program.programName}
                     </div>
-                    <div className="text-xs text-[#8A9099]">
+                    <div className="text-xs text-[var(--sara-text-secondary)]">
                       {program.organization}
                     </div>
                   </td>
@@ -138,7 +138,7 @@ export function ProgramTable({
                       </Link>
                       <button
                         onClick={() => onEdit(program)}
-                        className="text-[#5B6269] transition hover:text-[#16191D]"
+                        className="text-[#5B6269] transition hover:text-[var(--sara-text-primary)]"
                       >
                         Ubah
                       </button>
@@ -157,14 +157,14 @@ export function ProgramTable({
         </div>
 
         {filtered.length === 0 && (
-          <p className="px-5 py-10 text-center text-sm text-[#8A9099]">
+          <p className="px-5 py-10 text-center text-sm text-[var(--sara-text-secondary)]">
             Tidak ada program yang cocok dengan filter ini. Ubah kata kunci atau
             pilih goal lain.
           </p>
         )}
       </div>
 
-      <p className="text-xs text-[#8A9099]">
+      <p className="text-xs text-[var(--sara-text-secondary)]">
         Menampilkan {filtered.length} dari {programs.length} program.
       </p>
     </div>

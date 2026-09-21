@@ -11,17 +11,17 @@ import type { SdgProgram } from "@/lib/types/sdgProgram";
  */
 export function RiskWatchlist({ programs }: { programs: SdgProgram[] }) {
   return (
-    <section className="rounded-2xl border border-[#ECEEF0] bg-white p-6">
-      <h2 className="text-base font-semibold text-[#16191D]">
+    <section className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] p-6">
+      <h2 className="text-base font-semibold text-[var(--sara-text-primary)]">
         Perlu ditindaklanjuti
       </h2>
-      <p className="mt-1 text-sm text-[#8A9099]">
+      <p className="mt-1 text-sm text-[var(--sara-text-secondary)]">
         Program berisiko tinggi diurutkan lebih dulu. Skor besar dengan risiko
         tinggi berarti capaian belum didukung bukti yang memadai.
       </p>
 
       {programs.length === 0 ? (
-        <p className="mt-6 py-8 text-center text-sm text-[#8A9099]">
+        <p className="mt-6 py-8 text-center text-sm text-[var(--sara-text-secondary)]">
           Tidak ada program berisiko saat ini. Semua klaim capaian sebanding
           dengan buktinya.
         </p>
@@ -34,11 +34,11 @@ export function RiskWatchlist({ programs }: { programs: SdgProgram[] }) {
               <div className="min-w-0 flex-1">
                 <Link
                   href={`/impact-assessment/${program.id}`}
-                  className="block truncate text-sm font-medium text-[#16191D] transition hover:text-[#12A594]"
+                  className="block truncate text-sm font-medium text-[var(--sara-text-primary)] transition hover:text-[#12A594]"
                 >
                   {program.programName}
                 </Link>
-                <p className="truncate text-xs text-[#8A9099]">
+                <p className="truncate text-xs text-[var(--sara-text-secondary)]">
                   {program.organization}
                 </p>
               </div>

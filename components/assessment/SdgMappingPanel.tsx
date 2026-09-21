@@ -52,17 +52,17 @@ export function SdgMappingPanel({
   }
 
   return (
-    <section className="rounded-2xl border border-[#ECEEF0] bg-white p-6">
-      <h2 className="text-base font-semibold text-[#16191D]">
+    <section className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] p-6">
+      <h2 className="text-base font-semibold text-[var(--sara-text-primary)]">
         SDGs Mapping Panel
       </h2>
-      <p className="mt-1 text-sm text-[#8A9099]">
+      <p className="mt-1 text-sm text-[var(--sara-text-secondary)]">
         Goal utama sudah ditetapkan saat program dibuat. Pilih goal pendukung
         bila ada, lalu tentukan target spesifik yang benar-benar disasar.
       </p>
 
       <div className="mt-5">
-        <h3 className="mb-3 text-sm font-medium text-[#16191D]">
+        <h3 className="mb-3 text-sm font-medium text-[var(--sara-text-primary)]">
           Goal yang didukung
         </h3>
         {/* Tailwind hanya menyediakan grid-cols hingga 12, jadi 17 kolom
@@ -89,17 +89,17 @@ export function SdgMappingPanel({
             );
           })}
         </div>
-        <p className="mt-3 text-xs text-[#8A9099]">
+        <p className="mt-3 text-xs text-[var(--sara-text-secondary)]">
           Bertanda hitam adalah goal utama. Klik goal lain untuk menandainya
           sebagai pendukung.
         </p>
       </div>
 
-      <div className="mt-6 border-t border-[#ECEEF0] pt-6">
-        <h3 className="mb-1 text-sm font-medium text-[#16191D]">
+      <div className="mt-6 border-t border-[var(--sara-border)] pt-6">
+        <h3 className="mb-1 text-sm font-medium text-[var(--sara-text-primary)]">
           Target SDGs spesifik
         </h3>
-        <p className="mb-4 text-xs text-[#8A9099]">
+        <p className="mb-4 text-xs text-[var(--sara-text-secondary)]">
           Menyebut goal saja belum cukup. Pemetaan tanpa target spesifik
           menurunkan Impact Score dan menaikkan tingkat risiko.
         </p>
@@ -109,7 +109,7 @@ export function SdgMappingPanel({
             <div key={goal}>
               <div className="mb-2 flex items-center gap-2">
                 <GoalChip goal={goal} size="sm" />
-                <span className="text-sm font-medium text-[#16191D]">
+                <span className="text-sm font-medium text-[var(--sara-text-primary)]">
                   {SDG_GOALS[goal].name}
                 </span>
                 {goal === primaryGoal && (
@@ -125,15 +125,15 @@ export function SdgMappingPanel({
                   return (
                     <label
                       key={target.code}
-                      className="flex cursor-pointer items-start gap-2.5 rounded-lg px-2 py-1.5 transition hover:bg-[#FAFBFB]"
+                      className="flex cursor-pointer items-start gap-2.5 rounded-lg px-2 py-1.5 transition hover:bg-[var(--sara-muted-card)]"
                     >
                       <input
                         type="checkbox"
                         checked={checked}
                         onChange={() => toggleTarget(target.code)}
-                        className="mt-0.5 h-4 w-4 rounded border-[#D7DBDF] accent-[#12A594]"
+                        className="mt-0.5 h-4 w-4 rounded border-[var(--sara-border)] accent-[#12A594]"
                       />
-                      <span className="text-sm text-[#16191D]">
+                      <span className="text-sm text-[var(--sara-text-primary)]">
                         <span className="font-medium">{target.code}</span>{" "}
                         <span className="text-[#5B6269]">{target.label}</span>
                       </span>

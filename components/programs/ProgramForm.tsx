@@ -18,9 +18,9 @@ const EMPTY: ProgramFormValues = {
 };
 
 const inputClass =
-  "w-full rounded-lg border border-[#D7DBDF] bg-white px-3 py-2 text-sm text-[#16191D] outline-none transition focus:border-[#12A594] focus:ring-2 focus:ring-[#12A594]/20";
+  "w-full rounded-lg border border-[var(--sara-border)] bg-[var(--sara-surface)] px-3 py-2 text-sm text-[var(--sara-text-primary)] outline-none transition focus:border-[#12A594] focus:ring-2 focus:ring-[#12A594]/20";
 
-const labelClass = "mb-1.5 block text-sm font-medium text-[#16191D]";
+const labelClass = "mb-1.5 block text-sm font-medium text-[var(--sara-text-primary)]";
 
 function Field({
   label,
@@ -40,7 +40,7 @@ function Field({
       {error ? (
         <p className="mt-1 text-xs text-[#B91C1C]">{error}</p>
       ) : hint ? (
-        <p className="mt-1 text-xs text-[#8A9099]">{hint}</p>
+        <p className="mt-1 text-xs text-[var(--sara-text-secondary)]">{hint}</p>
       ) : null}
     </div>
   );
@@ -217,11 +217,11 @@ export function ProgramForm({
         </p>
       )}
 
-      <div className="flex items-center justify-end gap-3 border-t border-[#ECEEF0] pt-5">
+      <div className="flex items-center justify-end gap-3 border-t border-[var(--sara-border)] pt-5">
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg px-4 py-2 text-sm font-medium text-[#5B6269] transition hover:bg-[#F1F3F4]"
+          className="rounded-lg px-4 py-2 text-sm font-medium text-[#5B6269] transition hover:bg-[var(--sara-muted-card)]"
         >
           Batal
         </button>

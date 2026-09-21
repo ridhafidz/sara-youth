@@ -10,7 +10,9 @@ import {
   query,
   orderBy,
   limit,
+  addDoc,
   onSnapshot,
+  serverTimestamp,
   type Unsubscribe,
   type QuerySnapshot,
   type DocumentData,
@@ -48,6 +50,16 @@ function snapshotToNotification(snap: QuerySnapshot<DocumentData>): Notification
   return mapDoc(d.id, d.data() as FirestoreNotification);
 }
 
+// ── Writer ───────────────────────────────────────────────────────────────────
+
+export async function addNotification(message: string): Promise<void> {
+  await addDoc(collection(getDb(), "notifications"), {
+    message,
+    is_read: false,
+    created_at: serverTimestamp(),
+  });
+}
+
 // ── Real-time listener (latest notification) ──────────────────────────────────
 
 export function subscribeLatestNotification(
@@ -65,6 +77,32 @@ export function subscribeLatestNotification(
     (snap) => callback(snapshotToNotification(snap)),
     (err) => {
       console.error("[SARA] subscribeLatestNotification error:", err);
+      onError?.(err);
+    },
+  );
+}
+
+// ── Real-time listener (recent 10 notifications — for Topbar) ─────────────────
+
+function snapshotToNotifications(snap: QuerySnapshot<DocumentData>): Notification[] {
+  return snap.docs.map((d) => mapDoc(d.id, d.data() as FirestoreNotification));
+}
+
+export function subscribeRecentNotifications(
+  callback: (notifications: Notification[]) => void,
+  onError?: (err: Error) => void,
+): Unsubscribe {
+  const q = query(
+    collection(getDb(), "notifications"),
+    orderBy("created_at", "desc"),
+    limit(10),
+  );
+
+  return onSnapshot(
+    q,
+    (snap) => callback(snapshotToNotifications(snap)),
+    (err) => {
+      console.error("[SARA] subscribeRecentNotifications error:", err);
       onError?.(err);
     },
   );

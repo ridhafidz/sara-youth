@@ -50,7 +50,7 @@ const SUSTAINABILITY_OPTIONS: Array<{
 ];
 
 const inputClass =
-  "w-full rounded-lg border border-[#D7DBDF] bg-white px-3 py-2 text-sm text-[#16191D] outline-none transition focus:border-[#12A594] focus:ring-2 focus:ring-[#12A594]/20";
+  "w-full rounded-lg border border-[var(--sara-border)] bg-[var(--sara-surface)] px-3 py-2 text-sm text-[var(--sara-text-primary)] outline-none transition focus:border-[#12A594] focus:ring-2 focus:ring-[#12A594]/20";
 
 export default function ImpactAssessmentDetailPage() {
   const params = useParams<{ programId: string }>();
@@ -154,19 +154,19 @@ export default function ImpactAssessmentDetailPage() {
   if (loading) {
     return (
       <div className="space-y-4">
-        <div className="h-8 w-64 animate-pulse rounded-lg bg-[#F1F3F4]" />
-        <div className="h-64 animate-pulse rounded-2xl bg-[#F1F3F4]" />
+        <div className="h-8 w-64 animate-pulse rounded-lg bg-[var(--sara-muted-card)]" />
+        <div className="h-64 animate-pulse rounded-2xl bg-[var(--sara-muted-card)]" />
       </div>
     );
   }
 
   if (notFound || !program) {
     return (
-      <div className="rounded-2xl border border-[#ECEEF0] bg-white px-6 py-14 text-center">
-        <h1 className="text-base font-semibold text-[#16191D]">
+      <div className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] px-6 py-14 text-center">
+        <h1 className="text-base font-semibold text-[var(--sara-text-primary)]">
           Program tidak ditemukan
         </h1>
-        <p className="mt-1 text-sm text-[#8A9099]">
+        <p className="mt-1 text-sm text-[var(--sara-text-secondary)]">
           Program mungkin sudah dihapus atau tautannya keliru.
         </p>
         <button
@@ -189,12 +189,12 @@ export default function ImpactAssessmentDetailPage() {
           >
             Kembali ke daftar penilaian
           </Link>
-          <h1 className="mt-2 text-xl font-semibold text-[#16191D]">
+          <h1 className="mt-2 text-xl font-semibold text-[var(--sara-text-primary)]">
             {program.programName}
           </h1>
           <div className="mt-2 flex flex-wrap items-center gap-3">
             <GoalChip goal={program.primaryGoal} size="sm" showName />
-            <span className="text-sm text-[#8A9099]">{program.organization}</span>
+            <span className="text-sm text-[var(--sara-text-secondary)]">{program.organization}</span>
             <StatusBadge status={program.status} />
           </div>
         </div>
@@ -235,26 +235,26 @@ export default function ImpactAssessmentDetailPage() {
             }
           />
 
-          <section className="rounded-2xl border border-[#ECEEF0] bg-white p-6">
-            <h2 className="text-base font-semibold text-[#16191D]">
+          <section className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] p-6">
+            <h2 className="text-base font-semibold text-[var(--sara-text-primary)]">
               Penerima manfaat
             </h2>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-[#16191D]">
+                <label className="mb-1.5 block text-sm font-medium text-[var(--sara-text-primary)]">
                   Target
                 </label>
                 <input
-                  className={`${inputClass} bg-[#F1F3F4]`}
+                  className={`${inputClass} bg-[var(--sara-muted-card)]`}
                   value={program.beneficiariesTarget}
                   readOnly
                 />
-                <p className="mt-1 text-xs text-[#8A9099]">
+                <p className="mt-1 text-xs text-[var(--sara-text-secondary)]">
                   Diambil dari data program. Ubah lewat halaman SDGs Programs.
                 </p>
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-[#16191D]">
+                <label className="mb-1.5 block text-sm font-medium text-[var(--sara-text-primary)]">
                   Realisasi
                 </label>
                 <input
@@ -271,7 +271,7 @@ export default function ImpactAssessmentDetailPage() {
                   }
                   placeholder="—"
                 />
-                <p className="mt-1 text-xs text-[#8A9099]">
+                <p className="mt-1 text-xs text-[var(--sara-text-secondary)]">
                   Jumlah orang yang benar-benar terjangkau.
                 </p>
               </div>
@@ -290,11 +290,11 @@ export default function ImpactAssessmentDetailPage() {
             onChange={(evidence) => setValues((prev) => ({ ...prev, evidence }))}
           />
 
-          <section className="rounded-2xl border border-[#ECEEF0] bg-white p-6">
-            <h2 className="text-base font-semibold text-[#16191D]">
+          <section className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] p-6">
+            <h2 className="text-base font-semibold text-[var(--sara-text-primary)]">
               Keberlanjutan
             </h2>
-            <p className="mt-1 text-sm text-[#8A9099]">
+            <p className="mt-1 text-sm text-[var(--sara-text-secondary)]">
               Apa yang terjadi pada program ini setelah periode pelaksanaan
               selesai.
             </p>
@@ -305,7 +305,7 @@ export default function ImpactAssessmentDetailPage() {
                   className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 transition ${
                     values.sustainability === option.value
                       ? "border-[#12A594] bg-[#E4F6F3]/40"
-                      : "border-[#ECEEF0] hover:border-[#D7DBDF]"
+                      : "border-[var(--sara-border)] hover:border-[var(--sara-border)]"
                   }`}
                 >
                   <input
@@ -321,10 +321,10 @@ export default function ImpactAssessmentDetailPage() {
                     className="mt-0.5 h-4 w-4 accent-[#12A594]"
                   />
                   <span>
-                    <span className="block text-sm font-medium text-[#16191D]">
+                    <span className="block text-sm font-medium text-[var(--sara-text-primary)]">
                       {option.label}
                     </span>
-                    <span className="block text-xs text-[#8A9099]">
+                    <span className="block text-xs text-[var(--sara-text-secondary)]">
                       {option.description}
                     </span>
                   </span>

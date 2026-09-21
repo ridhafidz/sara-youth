@@ -11,8 +11,10 @@ import {
   query,
   orderBy,
   limit,
+  addDoc,
   getDocs,
   onSnapshot,
+  serverTimestamp,
   type Unsubscribe,
   type QuerySnapshot,
   type DocumentData,
@@ -56,6 +58,21 @@ function mapDoc(id: string, data: FirestoreActivity): Activity {
 
 function snapshotToActivities(snap: QuerySnapshot<DocumentData>): Activity[] {
   return snap.docs.map((d) => mapDoc(d.id, d.data() as FirestoreActivity));
+}
+
+// ── Writer ───────────────────────────────────────────────────────────────────
+
+export async function addActivity(
+  title: string,
+  status: "active" | "pending" | "done" = "active",
+  icon: string = "FileCheck",
+): Promise<void> {
+  await addDoc(collection(getDb(), "activities"), {
+    title,
+    status,
+    icon,
+    created_at: serverTimestamp(),
+  });
 }
 
 // ── One-shot fetch ────────────────────────────────────────────────────────────

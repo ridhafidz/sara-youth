@@ -15,18 +15,18 @@ export default function DashboardLayout({
      * Below `lg` (1024px): collapses to single-column.
      */
     <AuthProvider>
-      <div className="flex h-screen overflow-hidden bg-[var(--sara-bg)]">
+      <div className="flex h-screen overflow-hidden bg-[var(--sara-bg)] print:h-auto print:overflow-visible print:block">
         {/* ── Left: Sidebar (sticky, full height) ── */}
-        <div className="hidden lg:flex shrink-0">
+        <div className="hidden lg:flex shrink-0 print:hidden">
           <Sidebar />
         </div>
 
         {/* ── Center: Topbar + scrollable content ── */}
-        <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-          <Topbar />
+        <div className="flex flex-col flex-1 min-w-0 overflow-hidden print:overflow-visible print:block">
+          <div className="print:hidden"><Topbar /></div>
           <main
             id="main-content"
-            className="flex-1 overflow-y-auto px-6 py-6"
+            className="flex-1 overflow-y-auto px-6 py-6 print:overflow-visible print:px-0 print:py-0"
             style={{ gap: "var(--sara-space-card-gap)" }}
           >
             {children}
@@ -34,7 +34,7 @@ export default function DashboardLayout({
         </div>
 
         {/* ── Right: Panel (sticky, full height) ── */}
-        <div className="hidden xl:flex shrink-0 overflow-y-auto">
+        <div className="hidden xl:flex shrink-0 overflow-y-auto print:hidden">
           <RightPanel />
         </div>
       </div>

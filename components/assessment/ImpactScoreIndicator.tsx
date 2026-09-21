@@ -47,7 +47,7 @@ function Gauge({ score }: { score: number }) {
         >
           {score}
         </div>
-        <div className="text-xs text-[#8A9099]">dari 100</div>
+        <div className="text-xs text-[var(--sara-text-secondary)]">dari 100</div>
       </div>
     </div>
   );
@@ -64,31 +64,31 @@ export function ImpactScoreIndicator({ result }: { result: ScoringResult }) {
   const breakdown = explainImpactScore(result);
 
   return (
-    <section className="rounded-2xl border border-[#ECEEF0] bg-white p-6">
-      <h2 className="text-base font-semibold text-[#16191D]">
+    <section className="rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] p-6">
+      <h2 className="text-base font-semibold text-[var(--sara-text-primary)]">
         Impact Score Indicator
       </h2>
-      <p className="mt-1 text-sm text-[#8A9099]">
+      <p className="mt-1 text-sm text-[var(--sara-text-secondary)]">
         Diperbarui langsung saat data di kiri berubah.
       </p>
 
       <div className="mt-4 flex flex-col items-center">
         <Gauge score={result.impactScore} />
-        <p className="mt-3 text-sm font-medium text-[#16191D]">{result.band}</p>
+        <p className="mt-3 text-sm font-medium text-[var(--sara-text-primary)]">{result.band}</p>
       </div>
 
-      <div className="mt-6 space-y-3 border-t border-[#ECEEF0] pt-5">
-        <h3 className="text-sm font-medium text-[#16191D]">Rincian poin</h3>
+      <div className="mt-6 space-y-3 border-t border-[var(--sara-border)] pt-5">
+        <h3 className="text-sm font-medium text-[var(--sara-text-primary)]">Rincian poin</h3>
         {breakdown.map((item) => (
           <div key={item.key}>
             <div className="flex items-baseline justify-between text-sm">
               <span className="text-[#5B6269]">{item.label}</span>
-              <span className="tabular-nums text-[#16191D]">
+              <span className="tabular-nums text-[var(--sara-text-primary)]">
                 {item.points.toFixed(1)}
-                <span className="text-[#8A9099]"> / {item.max}</span>
+                <span className="text-[var(--sara-text-secondary)]"> / {item.max}</span>
               </span>
             </div>
-            <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-[#F1F3F4]">
+            <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-[var(--sara-muted-card)]">
               <div
                 className="h-full rounded-full bg-[#12A594] transition-all duration-500"
                 style={{ width: `${(item.points / item.max) * 100}%` }}
@@ -98,9 +98,9 @@ export function ImpactScoreIndicator({ result }: { result: ScoringResult }) {
         ))}
       </div>
 
-      <div className="mt-6 border-t border-[#ECEEF0] pt-5">
+      <div className="mt-6 border-t border-[var(--sara-border)] pt-5">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium text-[#16191D]">
+          <h3 className="text-sm font-medium text-[var(--sara-text-primary)]">
             Risiko akuntabilitas
           </h3>
           <RiskBadge risk={result.riskLevel} />
@@ -126,7 +126,7 @@ export function ImpactScoreIndicator({ result }: { result: ScoringResult }) {
           </ul>
         )}
 
-        <p className="mt-4 text-xs text-[#8A9099]">
+        <p className="mt-4 text-xs text-[var(--sara-text-secondary)]">
           Skor tinggi dengan risiko tinggi berarti capaian besar yang belum
           didukung bukti memadai.
         </p>

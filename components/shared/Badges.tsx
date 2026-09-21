@@ -25,14 +25,14 @@ export function GoalChip({
       </span>
       <span className="sr-only">{`SDG ${goal}: ${meta.name}`}</span>
       {showName && (
-        <span className="text-sm text-[#16191D]">{meta.shortName}</span>
+        <span className="text-sm text-[var(--sara-text-primary)]">{meta.shortName}</span>
       )}
     </span>
   );
 }
 
 const STATUS_STYLE: Record<ProgramStatus, { label: string; className: string }> = {
-  draft: { label: "Belum diukur", className: "bg-[#F1F3F4] text-[#5B6269]" },
+  draft: { label: "Belum diukur", className: "bg-[var(--sara-muted-card)] text-[#5B6269]" },
   measured: { label: "Sudah diukur", className: "bg-[#E4F6F3] text-[#0C8377]" },
   reported: { label: "Dilaporkan", className: "bg-[#DBEAFE] text-[#1D4ED8]" },
 };
@@ -56,7 +56,7 @@ const RISK_STYLE: Record<RiskLevel, { label: string; className: string }> = {
 
 export function RiskBadge({ risk }: { risk: RiskLevel | null }) {
   if (risk === null) {
-    return <span className="text-sm text-[#8A9099]">—</span>;
+    return <span className="text-sm text-[var(--sara-text-secondary)]">—</span>;
   }
   const style = RISK_STYLE[risk];
   return (
@@ -72,7 +72,7 @@ export function RiskBadge({ risk }: { risk: RiskLevel | null }) {
 /** Skor dengan bar tipis di bawahnya. */
 export function ScoreCell({ score }: { score: number | null }) {
   if (score === null) {
-    return <span className="text-sm text-[#8A9099]">Belum diukur</span>;
+    return <span className="text-sm text-[var(--sara-text-secondary)]">Belum diukur</span>;
   }
 
   const color =
@@ -80,7 +80,7 @@ export function ScoreCell({ score }: { score: number | null }) {
 
   return (
     <div className="w-24">
-      <div className="text-sm font-semibold text-[#16191D]">{score}</div>
+      <div className="text-sm font-semibold text-[var(--sara-text-primary)]">{score}</div>
       <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-[#ECEEF0]">
         <div
           className="h-full rounded-full"
@@ -102,9 +102,9 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-[#D7DBDF] bg-white px-6 py-14 text-center">
-      <h3 className="text-base font-semibold text-[#16191D]">{title}</h3>
-      <p className="mt-1 max-w-sm text-sm text-[#8A9099]">{description}</p>
+    <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-[var(--sara-border)] bg-[var(--sara-surface)] px-6 py-14 text-center">
+      <h3 className="text-base font-semibold text-[var(--sara-text-primary)]">{title}</h3>
+      <p className="mt-1 max-w-sm text-sm text-[var(--sara-text-secondary)]">{description}</p>
       {action && <div className="mt-5">{action}</div>}
     </div>
   );

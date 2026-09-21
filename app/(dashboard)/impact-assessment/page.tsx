@@ -16,14 +16,14 @@ function ProgramCard({ program }: { program: SdgProgram }) {
   return (
     <Link
       href={`/impact-assessment/${program.id}`}
-      className="block rounded-2xl border border-[#ECEEF0] bg-white p-5 transition hover:border-[#12A594]/40 hover:shadow-[0_1px_3px_rgba(16,24,40,0.08)]"
+      className="block rounded-2xl border border-[var(--sara-border)] bg-[var(--sara-surface)] p-5 transition hover:border-[#12A594]/40 hover:shadow-[0_1px_3px_rgba(16,24,40,0.08)]"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="truncate font-medium text-[#16191D]">
+          <h3 className="truncate font-medium text-[var(--sara-text-primary)]">
             {program.programName}
           </h3>
-          <p className="mt-0.5 truncate text-xs text-[#8A9099]">
+          <p className="mt-0.5 truncate text-xs text-[var(--sara-text-secondary)]">
             {program.organization}
           </p>
         </div>
@@ -64,10 +64,10 @@ export default function ImpactAssessmentPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-xl font-semibold text-[#16191D]">
+        <h1 className="text-xl font-semibold text-[var(--sara-text-primary)]">
           Impact Assessment
         </h1>
-        <p className="mt-1 text-sm text-[#8A9099]">
+        <p className="mt-1 text-sm text-[var(--sara-text-secondary)]">
           Petakan program ke target SDGs, isi capaian indikator, dan hitung
           Impact Score. Tahap Measure pada framework SARA Youth.
         </p>
@@ -82,7 +82,7 @@ export default function ImpactAssessmentPage() {
       {loading ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[0, 1, 2].map((i) => (
-            <div key={i} className="h-32 animate-pulse rounded-2xl bg-[#F1F3F4]" />
+            <div key={i} className="h-32 animate-pulse rounded-2xl bg-[var(--sara-muted-card)]" />
           ))}
         </div>
       ) : programs.length === 0 ? (
@@ -101,14 +101,14 @@ export default function ImpactAssessmentPage() {
       ) : (
         <>
           <section>
-            <h2 className="mb-3 text-sm font-medium text-[#16191D]">
+            <h2 className="mb-3 text-sm font-medium text-[var(--sara-text-primary)]">
               Menunggu penilaian
-              <span className="ml-2 rounded-full bg-[#F1F3F4] px-2 py-0.5 text-xs text-[#5B6269]">
+              <span className="ml-2 rounded-full bg-[var(--sara-muted-card)] px-2 py-0.5 text-xs text-[#5B6269]">
                 {pending.length}
               </span>
             </h2>
             {pending.length === 0 ? (
-              <p className="rounded-xl border border-dashed border-[#D7DBDF] px-4 py-6 text-center text-sm text-[#8A9099]">
+              <p className="rounded-xl border border-dashed border-[var(--sara-border)] px-4 py-6 text-center text-sm text-[var(--sara-text-secondary)]">
                 Semua program sudah diukur dampaknya.
               </p>
             ) : (
@@ -122,9 +122,9 @@ export default function ImpactAssessmentPage() {
 
           {assessed.length > 0 && (
             <section>
-              <h2 className="mb-3 text-sm font-medium text-[#16191D]">
+              <h2 className="mb-3 text-sm font-medium text-[var(--sara-text-primary)]">
                 Sudah dinilai
-                <span className="ml-2 rounded-full bg-[#F1F3F4] px-2 py-0.5 text-xs text-[#5B6269]">
+                <span className="ml-2 rounded-full bg-[var(--sara-muted-card)] px-2 py-0.5 text-xs text-[#5B6269]">
                   {assessed.length}
                 </span>
               </h2>

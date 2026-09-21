@@ -7,10 +7,12 @@ import {
   Zap,
   MoreHorizontal,
   AlertCircle,
+  Info,
   type LucideIcon,
 } from "lucide-react";
 import { useActivities } from "@/hooks/useActivities";
 import type { Activity } from "@/lib/dummy";
+import { useState, useRef, useEffect } from "react";
 
 // ── Icon & Status registries ──────────────────────────────────────────────────
 
@@ -132,6 +134,18 @@ function ActivityRow({
 
 export function ActivitiesList() {
   const { activities, loading, error } = useActivities();
+  const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <section aria-labelledby="activities-heading">
@@ -142,12 +156,25 @@ export function ActivitiesList() {
         >
           Activities
         </h2>
-        <button
-          aria-label="More activity options"
-          className="text-[var(--sara-text-secondary)] hover:text-[var(--sara-text-primary)] transition-colors"
-        >
-          <MoreHorizontal size={16} />
-        </button>
+        <div className="relative" ref={menuRef}>
+          <button
+            aria-label="More activity options"
+            onClick={() => setShowMenu(!showMenu)}
+            className="text-[var(--sara-text-secondary)] hover:text-[var(--sara-text-primary)] transition-colors p-1 rounded-md hover:bg-[var(--sara-bg)]"
+          >
+            <MoreHorizontal size={16} />
+          </button>
+          {showMenu && (
+            <div className="absolute right-0 top-7 w-52 bg-[var(--sara-surface)] border border-[var(--sara-border)] rounded-xl shadow-lg z-20 p-3 animate-in fade-in zoom-in-95 duration-100">
+              <div className="flex items-start gap-2">
+                <Info size={13} className="text-[var(--sara-primary)] shrink-0 mt-0.5" />
+                <p className="text-[11px] text-[var(--sara-text-secondary)] leading-snug">
+                  Aktivitas dicatat otomatis dari aksi yang dilakukan admin, seperti menambah atau mengubah program SDGs.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Loading */}
