@@ -18,7 +18,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="flex items-center justify-center gap-3 mb-8">
           <Image
-            src="/sara-logo-new.png"
+            src="/sara-logo.png"
             alt="SARA Logo"
             width={40}
             height={40}
