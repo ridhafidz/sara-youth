@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Suspense } from "react";
 import { LoginForm } from "@/components/auth/LoginForm";
 
 export const metadata: Metadata = {
@@ -40,7 +41,9 @@ export default function LoginPage() {
           Masuk ke dashboard SARA Anda
         </p>
 
-        <LoginForm />
+        <Suspense fallback={<div className="h-64" />}>
+          <LoginForm />
+        </Suspense>
       </div>
     </div>
   );

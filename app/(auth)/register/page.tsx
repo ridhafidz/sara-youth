@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Suspense } from "react";
 import { RegisterForm } from "@/components/auth/RegisterForm";
 
 export const metadata: Metadata = {
@@ -40,7 +41,9 @@ export default function RegisterPage() {
           Daftar untuk mengakses dashboard SARA
         </p>
 
-        <RegisterForm />
+        <Suspense fallback={<div className="h-64" />}>
+          <RegisterForm />
+        </Suspense>
       </div>
     </div>
   );
